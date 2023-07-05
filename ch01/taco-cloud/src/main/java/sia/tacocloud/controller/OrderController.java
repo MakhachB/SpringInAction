@@ -1,6 +1,7 @@
 package sia.tacocloud.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +11,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import sia.tacocloud.model.TacoOrder;
 
+import javax.sql.DataSource;
 import javax.validation.Valid;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 @Slf4j
 @Controller
@@ -29,6 +34,7 @@ public class OrderController {
         if (errors.hasErrors()) {
             return "orderForm";
         }
+
 
         log.info("Order submitted: {}", order);
         sessionStatus.setComplete();
