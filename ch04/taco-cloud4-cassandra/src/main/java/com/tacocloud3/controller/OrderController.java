@@ -1,7 +1,6 @@
 package com.tacocloud3.controller;
 
 import com.tacocloud3.model.TacoOrder;
-import com.tacocloud3.model.udt.utils.IngredientUDTUtils;
 import com.tacocloud3.model.udt.utils.TacoUDTUtils;
 import com.tacocloud3.repository.OrderRepository;
 import com.tacocloud3.repository.TacoRepository;

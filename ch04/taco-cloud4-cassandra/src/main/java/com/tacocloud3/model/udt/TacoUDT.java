@@ -1,7 +1,9 @@
 package com.tacocloud3.model.udt;
 
-import com.tacocloud3.model.Ingredient;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.cassandra.core.mapping.UserDefinedType;
 
 import java.util.List;

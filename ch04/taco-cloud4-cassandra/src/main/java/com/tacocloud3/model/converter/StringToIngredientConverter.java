@@ -2,7 +2,6 @@ package com.tacocloud3.model.converter;
 
 import com.tacocloud3.model.udt.IngredientUDT;
 import com.tacocloud3.model.udt.utils.IngredientUDTUtils;
-import com.tacocloud3.model.udt.utils.TacoUDTUtils;
 import com.tacocloud3.repository.IngredientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.convert.converter.Converter;

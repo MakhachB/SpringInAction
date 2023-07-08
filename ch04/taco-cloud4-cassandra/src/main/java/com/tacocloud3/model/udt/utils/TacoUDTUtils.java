@@ -1,8 +1,6 @@
 package com.tacocloud3.model.udt.utils;
 
-import com.tacocloud3.model.Ingredient;
 import com.tacocloud3.model.Taco;
-import com.tacocloud3.model.udt.IngredientUDT;
 import com.tacocloud3.model.udt.TacoUDT;
 import lombok.experimental.UtilityClass;
 
@@ -11,7 +9,6 @@ import java.util.stream.Collectors;
 
 @UtilityClass
 public class TacoUDTUtils {
-
     public TacoUDT toTacoUDT(Taco taco) {
         return new TacoUDT(taco.getName(), taco.getIngredients());
     }
@@ -31,6 +28,4 @@ public class TacoUDTUtils {
                 .map(TacoUDTUtils::toTaco)
                 .collect(Collectors.toList());
     }
-
-
 }

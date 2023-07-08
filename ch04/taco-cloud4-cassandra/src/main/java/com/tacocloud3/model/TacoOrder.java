@@ -2,7 +2,6 @@ package com.tacocloud3.model;
 
 import com.datastax.oss.driver.api.core.uuid.Uuids;
 import com.tacocloud3.model.udt.TacoUDT;
-import com.tacocloud3.model.udt.utils.TacoUDTUtils;
 import lombok.Data;
 import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
@@ -18,7 +17,6 @@ import java.util.UUID;
 
 @Data
 @Table("orders")
-
 public class TacoOrder implements Serializable {
 
     private static final long serialVersionID = 1L;

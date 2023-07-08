@@ -7,7 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import static com.tacocloud3.model.Ingredient.*;
+import static com.tacocloud3.model.Ingredient.Type;
 
 @SpringBootApplication
 public class TacoCloud4Application {
