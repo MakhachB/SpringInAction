@@ -33,7 +33,6 @@ create table if not exists Ingredient_Ref
     taco_key   bigint     not null
 );
 
-
 create table if not exists Ingredient
 (
     id   varchar(4) primary key ,
