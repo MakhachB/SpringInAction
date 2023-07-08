@@ -22,17 +22,9 @@ public class TacoCloud3Application {
 	public ApplicationRunner dataLoader(IngredientRepository repo) {
 		System.out.println("Ingredient repo will be filled");
 		return args -> {
-			args.getNonOptionArgs().forEach(System.out::println);
-			System.out.println("---------------");
-			Arrays.stream(args.getSourceArgs()).forEach(System.out::println);
-			System.out.println("---------------");
-			args.getOptionNames().forEach(System.out::println);
-			System.out.println("---------------");
-			System.out.println(args.getOptionValues("version"));
 			repo.deleteAll(); // TODO: Quick hack to avoid tests from stepping on each other with constraint violations
-			repo.save(new Ingredient("БУЛК", "Булка", Type.WRAP));
-			repo.save(new Ingredient("ЛАВШ", "Лаваш", Type.WRAP));
-			repo.save(new Ingredient("ТАНД", "Тандыр", Type.WRAP));
+			repo.save(new Ingredient("FLTO", "Flour Tortilla", Type.WRAP));
+			repo.save(new Ingredient("COTO", "Corn Tortilla", Type.WRAP));
 			repo.save(new Ingredient("GRBF", "Ground Beef", Type.PROTEIN));
 			repo.save(new Ingredient("CARN", "Carnitas", Type.PROTEIN));
 			repo.save(new Ingredient("TMTO", "Diced Tomatoes", Type.VEGGIES));

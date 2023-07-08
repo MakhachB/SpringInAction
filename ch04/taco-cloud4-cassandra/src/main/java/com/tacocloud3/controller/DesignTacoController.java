@@ -3,6 +3,7 @@ package com.tacocloud3.controller;
 import com.tacocloud3.model.Ingredient;
 import com.tacocloud3.model.Taco;
 import com.tacocloud3.model.TacoOrder;
+import com.tacocloud3.model.udt.utils.TacoUDTUtils;
 import com.tacocloud3.repository.IngredientRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +39,9 @@ public class DesignTacoController {
             return "design";
         }
 
-        tacoOrder.addTaco(taco);
+        tacoOrder.addTaco(TacoUDTUtils.toTacoUDT(taco));
+
+
         log.info("Processing taco: {}", taco);
         return "redirect:/orders/current";
     }

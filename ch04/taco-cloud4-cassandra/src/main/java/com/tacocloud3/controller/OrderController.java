@@ -1,7 +1,10 @@
 package com.tacocloud3.controller;
 
 import com.tacocloud3.model.TacoOrder;
+import com.tacocloud3.model.udt.utils.IngredientUDTUtils;
+import com.tacocloud3.model.udt.utils.TacoUDTUtils;
 import com.tacocloud3.repository.OrderRepository;
+import com.tacocloud3.repository.TacoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -23,6 +26,8 @@ public class OrderController {
 
     private final OrderRepository orderRepository;
 
+    private final TacoRepository tacoRepository;
+
     @GetMapping("/current")
     public String orderForm() {
         return "orderForm";
@@ -36,6 +41,7 @@ public class OrderController {
         }
 
         TacoOrder saved = orderRepository.save(order);
+        tacoRepository.saveAll(TacoUDTUtils.toTacos(saved.getTacos()));
 
         System.out.println(saved);
         log.info("Order submitted: {}", order);

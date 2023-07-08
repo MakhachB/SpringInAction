@@ -1,11 +1,18 @@
 spring:
-
+  data:
+    cassandra:
+      keyspace-name: tacocloud
+      local-datacenter: datacenter1
+#      contact-points:
+#        - casshost-1.tacocloud.com
+#        - casshost-2.tacocloud.com
+#        - casshost-3.tacocloud.com
+#      port: 9042
+      schema-action: recreate
+#      username: tacocloud
+#      password: 123454
   thymeleaf:
     cache: false
 
-  datasource:
-    generate-unique-name: false
-    name: tacocloud
-
-server:
-  port: 8080
+#server:
+#  port: 8080
