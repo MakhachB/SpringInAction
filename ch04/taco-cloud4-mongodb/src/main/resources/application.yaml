@@ -1,0 +1,13 @@
+spring:
+  data:
+    mongodb:
+#      host: mongodb.tacocloud.com
+#      port: 27017
+#      username:
+#      password:
+      database: tacocloud
+
+  thymeleaf:
+    cache: false
+server:
+  port: 8080
