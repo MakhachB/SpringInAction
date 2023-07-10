@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:tacocloud
+    username: sa
+    password:
+    generate-unique-name: false
+
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+  thymeleaf:
+    cache: false
+
+

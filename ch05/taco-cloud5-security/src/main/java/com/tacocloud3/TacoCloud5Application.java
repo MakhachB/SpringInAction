@@ -1,21 +1,36 @@
 package com.tacocloud3;
 
 import com.tacocloud3.model.Ingredient;
+import com.tacocloud3.model.User;
 import com.tacocloud3.repository.IngredientRepository;
+import com.tacocloud3.repository.UserRepository;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import java.util.Arrays;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static com.tacocloud3.model.Ingredient.*;
 
 @SpringBootApplication
-public class TacoCloud3Application {
+public class TacoCloud5Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TacoCloud3Application.class, args);
+		SpringApplication.run(TacoCloud5Application.class, args);
+	}
+
+	@Bean
+	public ApplicationRunner dataUserLoader(UserRepository repo, PasswordEncoder encoder) {
+		System.out.println("User repo will be filled");
+		return args -> {
+			repo.deleteAll(); // TODO: Quick hack to avoid tests from stepping on each other with constraint violations
+			repo.save(new User("test", encoder.encode("12345"), "ffasdfasf", "fksdf",
+					"fksld", "fskldfj", "fsdf", "1231313"));
+
+			repo.save(new User("test2", encoder.encode("12345"), "ffasdfasf", "fksdf",
+					"fksld", "fskldfj", "fsdf", "1231313"));
+
+		};
 	}
 
 	@Bean
@@ -35,5 +50,7 @@ public class TacoCloud3Application {
 			repo.save(new Ingredient("SRCR", "Sour Cream", Type.SAUCE));
 		};
 	}
+
+
 
 }
