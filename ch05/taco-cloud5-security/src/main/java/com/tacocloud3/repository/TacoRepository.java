@@ -1,8 +1,8 @@
 package com.tacocloud3.repository;
 
 import com.tacocloud3.model.Taco;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TacoRepository extends CrudRepository<Taco, Long> {
+public interface TacoRepository extends JpaRepository<Taco, Long> {
 
 }

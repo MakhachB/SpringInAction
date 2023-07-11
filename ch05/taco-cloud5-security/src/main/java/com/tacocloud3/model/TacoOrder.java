@@ -29,6 +29,7 @@ public class TacoOrder implements Serializable {
     private String deliveryName;
 
     @NotBlank(message = "Street name is required")
+    @Column(length = 50, nullable = false, unique = true)
     private String deliveryStreet;
 
     @NotBlank(message = "City name is required")
@@ -50,7 +51,7 @@ public class TacoOrder implements Serializable {
     @Digits(integer = 3, fraction = 0, message = "Invalid CVV")
     private String ccCVV;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     public List<Taco> tacos = new ArrayList<>();
 
     public void addTaco(Taco taco) {

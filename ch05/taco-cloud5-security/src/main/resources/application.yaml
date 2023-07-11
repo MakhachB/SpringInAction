@@ -1,15 +1,16 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:tacocloud
-    username: sa
-    password:
-    generate-unique-name: false
+    url: jdbc:postgresql://localhost:5432/tacocloud
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
 
   jpa:
+    hibernate:
+      ddl-auto: create-drop # hiber will create and drop tables based on entities by itself
+    show-sql: true
     properties:
       hibernate:
-        show_sql: true
-  thymeleaf:
-    cache: false
-
-
+        format_sql: true # Форматирует sql код в логах (при создании таблиц)
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect

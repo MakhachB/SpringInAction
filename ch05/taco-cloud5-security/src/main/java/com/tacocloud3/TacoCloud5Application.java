@@ -1,6 +1,7 @@
 package com.tacocloud3;
 
 import com.tacocloud3.model.Ingredient;
+import com.tacocloud3.model.Role;
 import com.tacocloud3.model.User;
 import com.tacocloud3.repository.IngredientRepository;
 import com.tacocloud3.repository.UserRepository;
@@ -24,11 +25,11 @@ public class TacoCloud5Application {
 		System.out.println("User repo will be filled");
 		return args -> {
 			repo.deleteAll(); // TODO: Quick hack to avoid tests from stepping on each other with constraint violations
-			repo.save(new User("test", encoder.encode("12345"), "ffasdfasf", "fksdf",
-					"fksld", "fskldfj", "fsdf", "1231313"));
+			repo.save(new User(null, "test", encoder.encode("12345"), "ffasdfasf", "fksdf",
+					"fksld", "fskldfj", "fsdf", "1231313", Role.USER));
 
-			repo.save(new User("test2", encoder.encode("12345"), "ffasdfasf", "fksdf",
-					"fksld", "fskldfj", "fsdf", "1231313"));
+			repo.save(new User(null, "test2", encoder.encode("12345"), "ffasdfasf", "fksdf",
+					"fksld", "fskldfj", "fsdf", "1231313", Role.USER));
 
 		};
 	}
