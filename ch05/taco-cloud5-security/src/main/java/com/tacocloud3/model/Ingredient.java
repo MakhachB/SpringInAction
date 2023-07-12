@@ -4,6 +4,8 @@ import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import java.util.Objects;
 
@@ -18,6 +20,7 @@ public class Ingredient {
 
     private String name;
 
+    @Enumerated(EnumType.STRING)
     private Type type;
 
     public enum Type {

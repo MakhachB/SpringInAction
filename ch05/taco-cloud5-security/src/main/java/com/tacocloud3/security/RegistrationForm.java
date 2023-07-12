@@ -19,6 +19,6 @@ public class RegistrationForm {
 
     public User toUser(PasswordEncoder encoder) {
         return new User(null, username, encoder.encode(password),
-                fullname, street, city, state, zip, phone, Role.USER);
+                fullname, street, city, state, zip, phone, Role.ROLE_USER);
     }
 }

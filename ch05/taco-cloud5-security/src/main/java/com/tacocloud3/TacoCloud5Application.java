@@ -26,10 +26,10 @@ public class TacoCloud5Application {
 		return args -> {
 			repo.deleteAll(); // TODO: Quick hack to avoid tests from stepping on each other with constraint violations
 			repo.save(new User(null, "test", encoder.encode("12345"), "ffasdfasf", "fksdf",
-					"fksld", "fskldfj", "fsdf", "1231313", Role.USER));
+					"fksld", "fskldfj", "fsdf", "1231313", Role.ROLE_USER));
 
 			repo.save(new User(null, "test2", encoder.encode("12345"), "ffasdfasf", "fksdf",
-					"fksld", "fskldfj", "fsdf", "1231313", Role.USER));
+					"fksld", "fskldfj", "fsdf", "1231313", Role.ROLE_ADMIN));
 
 		};
 	}

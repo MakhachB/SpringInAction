@@ -6,6 +6,7 @@ import com.tacocloud3.model.TacoOrder;
 import com.tacocloud3.repository.IngredientRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -27,11 +28,13 @@ public class DesignTacoController {
     private final IngredientRepository ingredientRepository;
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public String showDesignForm() {
         return "design";
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public String processTaco(@Valid Taco taco, Errors errors,
                               @ModelAttribute TacoOrder tacoOrder) {
         if (errors.hasErrors()) {

@@ -14,6 +14,7 @@ import java.util.List;
 
 @Data
 @Entity
+@Table(name = "taco_order")
 public class TacoOrder implements Serializable {
 
     private static final long serialVersionID = 1L;
@@ -23,6 +24,9 @@ public class TacoOrder implements Serializable {
     private Long id;
 
     private Date placedAt;
+
+    @ManyToOne
+    private User user;
 
 //    @Column(name = "delivery_name")
     @NotBlank(message = "Delivery name is required")
@@ -51,8 +55,8 @@ public class TacoOrder implements Serializable {
     @Digits(integer = 3, fraction = 0, message = "Invalid CVV")
     private String ccCVV;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    public List<Taco> tacos = new ArrayList<>();
+    @OneToMany(mappedBy = "tacoOrder", cascade = CascadeType.ALL)
+    private List<Taco> tacos = new ArrayList<>();
 
     public void addTaco(Taco taco) {
         tacos.add(taco);
@@ -61,5 +65,22 @@ public class TacoOrder implements Serializable {
     @PrePersist
     void createdAt() {
         placedAt = new Date();
+    }
+
+    @Override
+    public String toString() {
+        return "TacoOrder{" +
+                "id=" + id +
+                ", placedAt=" + placedAt +
+                ", user=" + user +
+                ", deliveryName='" + deliveryName + '\'' +
+                ", deliveryStreet='" + deliveryStreet + '\'' +
+                ", deliveryCity='" + deliveryCity + '\'' +
+                ", deliveryState='" + deliveryState + '\'' +
+                ", deliveryZip='" + deliveryZip + '\'' +
+                ", ccNumber='" + ccNumber + '\'' +
+                ", ccExpiration='" + ccExpiration + '\'' +
+                ", ccCVV='" + ccCVV + '\'' +
+                '}';
     }
 }

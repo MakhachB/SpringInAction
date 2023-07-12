@@ -7,10 +7,19 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create-drop # hiber will create and drop tables based on entities by itself
+      ddl-auto: create-drop # hibernate will create and drop tables based on entities by itself
     show-sql: true
     properties:
       hibernate:
         format_sql: true # Форматирует sql код в логах (при создании таблиц)
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          facebook:
+#            client-id: <facebook client id>
+#            client-secret: <facebook client secret>
+#            scope: email, public_profile

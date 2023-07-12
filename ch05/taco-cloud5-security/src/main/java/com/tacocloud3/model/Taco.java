@@ -25,7 +25,7 @@ public class Taco {
 
     @ManyToOne
     @JoinColumn(name = "taco_order", referencedColumnName = "id")
-    private TacoOrder order;
+    private TacoOrder tacoOrder;
 
     @Size(min = 1, message = "You must choose at least 1 ingredient")
     @ManyToMany
@@ -39,4 +39,6 @@ public class Taco {
     void createdAt() {
         this.createdAt = new Date();
     }
+
+
 }
