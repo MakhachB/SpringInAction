@@ -1,0 +1,49 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tacocloud
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  sql:
+    init:
+      schema-locations: classpath:db/schema-local.sql
+      mode: always
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop # hibernate will create and drop tables based on entities by itself
+    show-sql: true
+    properties:
+      hibernate:
+        default_schema: local
+    #        format_sql: true # Форматирует sql код в логах (при создании таблиц)
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+
+taco:
+  orders:
+    page-size: 10
+    sort: true
+
+logging:
+  file:
+    path: /var/logs/ #TODO
+    name: TacoCloud.log
+  level:
+    root: info
+    org.springframework.security: debug
+  logback:
+    rollingpolicy:
+      clean-history-on-start: on #TODO
+
+server:
+  port: 8080
+#  port: 0 // spring will generate random port to avoid random conflict
+#  port: 8443
+
+
+greeting: # Custom properties
+  welcome:
+    You are using ${spring.application.name:alternative text}.
