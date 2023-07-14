@@ -1,16 +1,14 @@
 spring:
+  sql:
+    init:
+      schema-locations: classpath:db/schema-prod.sql
   jpa:
     show-sql: false
     properties:
       hibernate:
         default_schema: prod
-
   application:
     name: taco_prod
-
-  sql:
-    init:
-      schema-locations: classpath:db/schema-prod.sql
 
 logging:
   level:

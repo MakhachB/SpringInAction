@@ -22,20 +22,20 @@ public class SecurityConfig {
                 .antMatchers("/", "/**").permitAll()
 
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/design") // Можно передать true вторым типом, чтобы юзер всегда перенаправлялся сюда
+                    .formLogin()
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/design") // Можно передать true вторым типом, чтобы юзер всегда перенаправлялся сюда
 
                 .and()
-                .logout() // By default, works on '/logout'
-                .logoutSuccessUrl("/") // without this user will be redirected on '/login'
+                    .logout() // By default, works on '/logout'
+                        .logoutSuccessUrl("/") // without this user will be redirected on '/login'
 
                 // Allow pages to be loaded in frames from the same origin; needed for H2-Console
                 // TODO Изучить
                 .and()
-                .headers()
-                .frameOptions()
-                .sameOrigin()
+                    .headers()
+                        .frameOptions()
+                            .sameOrigin()
 
                 // При включении csrf все запросы из форм кроме get будут блокироваться
 //                .and()

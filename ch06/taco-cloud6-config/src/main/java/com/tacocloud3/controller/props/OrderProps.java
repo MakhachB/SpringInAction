@@ -13,7 +13,7 @@ import org.springframework.validation.annotation.Validated;
 public class OrderProps {
 
     /**
-     * FKLDSFJLKFJDSFJLFJKLDSJLJFLKSJFDLK
+     * test
      */
     @Range(min = 5, max = 25, message = "must be between 5 and 25")
 //    @Min(value = 5, message = "must be greater than or equal to 5")
