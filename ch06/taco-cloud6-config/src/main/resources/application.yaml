@@ -28,9 +28,9 @@ taco:
     sort: true
 
 logging:
-  file:
-    path: /var/logs/ #TODO
-    name: TacoCloud.log
+#  file:
+#    path: /var/logs/ #TODO
+#    name: TacoCloud.log
   level:
     root: info
     org.springframework.security: debug
