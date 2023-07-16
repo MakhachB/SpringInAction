@@ -28,7 +28,7 @@ public class TacoApiController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Taco> tacoById(@PathVariable("id") Long id) {
+    public ResponseEntity<Taco> tacoById(@PathVariable Long id) {
         Optional<Taco> taco = tacoRepo.findById(id);
         if (taco.isPresent()) {
             return new ResponseEntity<>(taco.get(), HttpStatus.OK);

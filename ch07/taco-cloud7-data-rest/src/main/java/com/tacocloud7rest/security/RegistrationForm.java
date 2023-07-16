@@ -1,6 +1,5 @@
 package com.tacocloud7rest.security;
 
-import com.tacocloud7rest.model.Role;
 import lombok.Data;
 import org.springframework.security.crypto.password.PasswordEncoder;
 

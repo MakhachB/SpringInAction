@@ -1,7 +1,5 @@
 package com.tacocloud7rest.security;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.tacocloud7rest.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

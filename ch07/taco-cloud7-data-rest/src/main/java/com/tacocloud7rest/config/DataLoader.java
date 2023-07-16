@@ -1,7 +1,7 @@
 package com.tacocloud7rest.config;
 
 import com.tacocloud7rest.model.Ingredient;
-import com.tacocloud7rest.model.Role;
+import com.tacocloud7rest.security.Role;
 import com.tacocloud7rest.model.Taco;
 import com.tacocloud7rest.repository.IngredientRepository;
 import com.tacocloud7rest.repository.TacoRepository;

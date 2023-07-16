@@ -7,9 +7,11 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/api/orders", produces = "application/json")
@@ -23,6 +25,15 @@ public class OrderApiController {
     public List<TacoOrder> recentOrders() {
         PageRequest page = PageRequest.of(0, RESENT_ORDERS_SIZE, Sort.by("placedAt"));
         return repo.findAll(page).getContent();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<TacoOrder> orderById(@PathVariable Long id) {
+        Optional<TacoOrder> order = repo.findById(id);
+        if (order.isPresent()) {
+            return new ResponseEntity<>(order.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
     @PutMapping(path = "/{id}", consumes = "application/json")
