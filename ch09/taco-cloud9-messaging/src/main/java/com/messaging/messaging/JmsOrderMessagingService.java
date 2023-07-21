@@ -16,13 +16,14 @@ import javax.jms.Session;
 public class JmsOrderMessagingService implements OrderMessagingService {
 
     private final JmsTemplate jms;
-    private final Destination destination;
+//    private final Destination destination;
 
     @Override
     public void sendOrder(TacoOrder tacoOrder) {
 //        jms.send(session -> session.createObjectMessage(tacoOrder));  // using default-destination
 //        jms.send(destination, session -> session.createObjectMessage(tacoOrder));  // using custom destination
-//        jms.send("taco.cloud.queue-string-dest", session -> session.createObjectMessage(tacoOrder)); // using string dest
+//        jms.send("taco.cloud.queue-string-dest",
+//                session -> session.createObjectMessage(tacoOrder)); // using string dest
 
 //        jms.convertAndSend(tacoOrder);
 

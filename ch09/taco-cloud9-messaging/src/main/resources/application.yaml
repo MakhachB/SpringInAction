@@ -29,6 +29,8 @@ spring:
     broker-url: tcp://localhost:61616
     user: artemis
     password: simetraehcapa
+    embedded:
+      enabled: false
 
 logging:
 #  file:

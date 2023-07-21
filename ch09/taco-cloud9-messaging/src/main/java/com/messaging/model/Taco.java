@@ -12,9 +12,9 @@ import java.util.List;
 
 @Data
 @Entity
-public class Taco implements Serializable {
+public class Taco {
 
-    private static final long serialVersionID = 1L;
+//    private static final long serialVersionID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

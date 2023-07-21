@@ -14,9 +14,9 @@ import java.io.Serializable;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Ingredient implements Serializable {
+public class Ingredient {
 
-    private static final long serialVersionID = 1L;
+//    private static final long serialVersionID = 1L;
 
     @Id
     private String id;
