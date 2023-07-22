@@ -15,7 +15,20 @@ spring:
     password: simetraehcapa
     embedded:
       enabled: false
-    
+---
+spring:
+  config:
+    activate:
+      on-profile: rabbit
+
+  rabbitmq:
+    host: localhost # By default
+    port: 5672      # By default
+    username: guest # By default
+    password: guest # By default
+    template:
+      receive-timeout: 3000
+
 ---
 spring:
   profiles: kafka-listener

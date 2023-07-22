@@ -12,7 +12,7 @@ import tacos.kitchen.messaging.OrderReceiver;
 
 import java.time.LocalDateTime;
 
-@Profile({"jms-template", "rabbitmq-template"})
+@Profile({"jms-template", "rabbit"})
 @Controller
 @RequestMapping("/orders")
 @RequiredArgsConstructor

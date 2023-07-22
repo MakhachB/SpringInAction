@@ -17,20 +17,28 @@ spring:
     properties:
       hibernate:
         default_schema: local
-    #        format_sql: true # Форматирует sql код в логах (при создании таблиц)
+    #        format_sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
-  jms:
+  rabbitmq:
+    host: localhost # By default
+    port: 5672      # By default
+    username: guest # By default
+    password: guest # By default
     template:
-      default-destination: tacocloud.order.queue
+      exchange: tacocloud.order
+      routing-key: kitchens.central
 
-  artemis:
-    broker-url: tcp://localhost:61616
-    user: artemis
-    password: simetraehcapa
-    embedded:
-      enabled: false
+#  jms:
+#    template:
+#      default-destination: tacocloud.order.queue
+#  artemis:
+#    broker-url: tcp://localhost:61616
+#    user: artemis
+#    password: simetraehcapa
+#    embedded:
+#      enabled: false
 
 logging:
 #  file:
@@ -38,7 +46,7 @@ logging:
 #    name: TacoCloud.log
   level:
     root: info
-    org.springframework.security: debug
+#    org.springframework.security: debug
   logback:
     rollingpolicy:
       clean-history-on-start: on #TODO
