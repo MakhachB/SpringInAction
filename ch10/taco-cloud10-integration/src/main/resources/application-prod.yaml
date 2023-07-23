@@ -1,0 +1,32 @@
+spring:
+  sql:
+    init:
+      schema-locations: classpath:db/schema-prod.sql
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        default_schema: prod
+  application:
+    name: taco_prod
+
+logging:
+  level:
+    org.springframework.security: info
+    org.hibernate: error
+
+server:
+  port: 8081
+
+
+
+---
+spring:
+  config.activate.on-profile: ssl # inner config has more priority than outer
+
+server:
+  ssl:
+    key-store: file:///C:\Users\HP\mykeys.jks
+    key-store-password: 123456
+    key-password: 123456
+#  port: 8443

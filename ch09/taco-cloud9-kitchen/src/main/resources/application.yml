@@ -31,7 +31,7 @@ spring:
 
 ---
 spring:
-  profiles: kafka-listener
+  profiles: kafka
     
   kafka:
     bootstrap-servers:
@@ -42,9 +42,5 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       group-id: tacocloud_kitchen
       properties:
-        spring.json.trusted.packages: tacos
-      
-      
-      
-      
-      
+#        spring.json.trusted.packages: "tacos.kitchen.model.TacoOrder"
+        spring.json.trusted.packages: "*" # TODO figure out

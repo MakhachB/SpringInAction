@@ -21,14 +21,39 @@ spring:
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
-  rabbitmq:
-    host: localhost # By default
-    port: 5672      # By default
-    username: guest # By default
-    password: guest # By default
+  # Required connection configs for Kafka producer, consumer, and admin
+#  kafka:
+#    properties:
+#      sasl:
+#        mechanism: PLAIN
+#        jaas:
+#        config: org.apache.kafka.common.security.plain.PlainLoginModule required username=MYUB5OXAUNFI3K2U password=wB1jnqEavnz8NeNRg/ed+3apS238qF19OixinNuu4G6BNTrcAnV9D8J4X2z1aTkM;
+#      bootstrap:
+#        servers: pkc-lzvrd.us-west4.gcp.confluent.cloud:9092
+#      session:
+#        timeout:
+#          ms: 45000
+
+
+
+  kafka:
+    bootstrap-servers:
+      - localhost:9092
+#      - localhost:9093 # maybe more than one server
+#      - localhost:9094
+    producer:
+      keySerializer: org.springframework.kafka.support.serializer.JsonSerializer
+      valueSerializer: org.springframework.kafka.support.serializer.JsonSerializer
     template:
-      exchange: tacocloud.order
-      routing-key: kitchens.central
+      default-topic: tacocloud.orders.topic
+#  rabbitmq:
+#    host: localhost # By default
+#    port: 5672      # By default
+#    username: guest # By default
+#    password: guest # By default
+#    template:
+#      exchange: tacocloud.order
+#      routing-key: kitchens.central
 
 #  jms:
 #    template:
@@ -41,12 +66,12 @@ spring:
 #      enabled: false
 
 logging:
-#  file:
-#    path: /var/logs/ #TODO
-#    name: TacoCloud.log
+  #  file:
+  #    path: /var/logs/ #TODO
+  #    name: TacoCloud.log
   level:
     root: info
-#    org.springframework.security: debug
+  #    org.springframework.security: debug
   logback:
     rollingpolicy:
       clean-history-on-start: on #TODO

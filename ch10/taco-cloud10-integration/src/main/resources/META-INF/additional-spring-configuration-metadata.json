@@ -1,0 +1,38 @@
+{
+  "properties": [
+    {
+      "name": "taco.orders.page-size",
+      "type": "java.lang.String",
+      "description": "Sets the maximum number of orders to display in a list."
+    },
+    {
+      "name": "taco.orders.sort",
+      "type": "java.lang.Boolean",
+      "description": "Description for taco.orders.sort."
+    },
+    {
+      "name": "taco.email.poll-rate",
+      "type": "java.lang.String",
+      "description": "Description for taco.email.poll-rate."
+    },
+    {
+      "name": "taco.email.mailbox",
+      "type": "java.lang.String",
+      "description": "Description for taco.email.mailbox."
+    },
+    {
+      "name": "taco.email.username",
+      "type": "java.lang.String",
+      "description": "Description for taco.email.username."
+    },
+    {
+      "name": "taco.email.password",
+      "type": "java.lang.String",
+      "description": "Description for taco.email.password."
+    },
+    {
+      "name": "taco.email.host",
+      "type": "java.lang.String",
+      "description": "Description for taco.email.host."
+    }
+  ] }
