@@ -4,14 +4,11 @@ import com.messaging.messaging.OrderMessagingService;
 import com.messaging.model.TacoOrder;
 import com.messaging.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping(path = "/api/orders", produces = "application/json")
@@ -26,45 +23,55 @@ public class OrderApiController {
     private final OrderMessagingService messagingService;
 
     @GetMapping(params = "recent")
-    public List<TacoOrder> recentOrders() {
-        PageRequest page = PageRequest.of(0, RESENT_ORDERS_SIZE, Sort.by("placedAt"));
-        return repo.findAll(page).getContent();
+    public Flux<TacoOrder> recentOrders() {
+//        PageRequest page = PageRequest.of(0, RESENT_ORDERS_SIZE, Sort.by("placedAt"));
+        return repo.findAll().take(RESENT_ORDERS_SIZE).take(12);
     }
 
     @PutMapping(path = "/{id}", consumes = "application/json")
-    public TacoOrder putOrder(@PathVariable Long id,
-                              @RequestBody TacoOrder tacoOrder) {
-        tacoOrder.setId(id);
-        return repo.save(tacoOrder);
+    public Mono<TacoOrder> putOrder(@PathVariable Long id,
+                                    @RequestBody Mono<TacoOrder> tacoOrder) {
+
+//        tacoOrder.setId(id);
+//        return repo.save(tacoOrder);
+
+        return tacoOrder
+                .flatMap(to -> {
+                    to.setId(id);
+                    return Mono.just(to);
+                })
+                .flatMap(repo::save);
     }
 
     @PatchMapping(path = "/{id}", consumes = "application/json")
-    public TacoOrder patchOrder(@PathVariable Long id,
-                                @RequestBody TacoOrder patch) {
-        TacoOrder order = repo.findById(id).get();
-        if (patch.getDeliveryName() != null) order.setDeliveryName(patch.getDeliveryName());
-        if (patch.getDeliveryStreet() != null) order.setDeliveryStreet(patch.getDeliveryStreet());
-        if (patch.getDeliveryCity() != null) order.setDeliveryCity(patch.getDeliveryCity());
-        if (patch.getDeliveryState() != null) order.setDeliveryState(patch.getDeliveryState());
-        if (patch.getDeliveryZip() != null) order.setDeliveryZip(patch.getDeliveryZip());
-        if (patch.getCcNumber() != null) order.setCcNumber(patch.getCcNumber());
-        if (patch.getCcExpiration() != null) order.setCcExpiration(patch.getCcExpiration());
-        if (patch.getCcCVV() != null) order.setCcCVV(patch.getCcCVV());
-        return repo.save(order);
+    public Mono<TacoOrder> patchOrder(@PathVariable Long id,
+                                      @RequestBody TacoOrder patch) {
+        return repo.findById(id).map(order -> {
+            if (patch.getDeliveryName() != null) order.setDeliveryName(patch.getDeliveryName());
+            if (patch.getDeliveryStreet() != null) order.setDeliveryStreet(patch.getDeliveryStreet());
+            if (patch.getDeliveryCity() != null) order.setDeliveryCity(patch.getDeliveryCity());
+            if (patch.getDeliveryState() != null) order.setDeliveryState(patch.getDeliveryState());
+            if (patch.getDeliveryZip() != null) order.setDeliveryZip(patch.getDeliveryZip());
+            if (patch.getCcNumber() != null) order.setCcNumber(patch.getCcNumber());
+            if (patch.getCcExpiration() != null) order.setCcExpiration(patch.getCcExpiration());
+            if (patch.getCcCVV() != null) order.setCcCVV(patch.getCcCVV());
+            return order;
+        }).flatMap(repo::save);
     }
 
     @PostMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public TacoOrder postOrder(@RequestBody TacoOrder order) {
+    public Mono<TacoOrder> postOrder(@RequestBody TacoOrder order) {
 //        messagingService.sendOrder(order);
         return repo.save(order);
     }
-    
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteOrder(@PathVariable Long id) {
         try {
             repo.deleteById(id);
-        } catch (EmptyResultDataAccessException ignored) {}
+        } catch (EmptyResultDataAccessException ignored) {
+        }
     }
 }

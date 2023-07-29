@@ -57,36 +57,36 @@ public class DataLoader {
             Ingredient sourCream = new Ingredient(
                     "SRCR", "Sour Cream", Type.SAUCE);
             repo.saveAll(List.of(flourTortilla, cornTortilla, groundBeef, carnitas, tomatoes,
-                    lettuce, cheddar, jack, salsa, sourCream));
+                    lettuce, cheddar, jack, salsa, sourCream)).subscribe();
 
             userRepo.save(new User(null, "habuma", encoder.encode("password"),
                     "Craig Walls", "123 North Street", "Cross Roads", "TX",
-                    "76227", "123-123-1234", Role.ROLE_ADMIN));
+                    "76227", "123-123-1234", Role.ROLE_ADMIN)).subscribe();
             userRepo.save(new User(null, "test", encoder.encode("12345"), "ffasdfasf", "fksdf",
-                    "fksld", "fskldfj", "fsdf", "1231313", Role.ROLE_USER));
+                    "fksld", "fskldfj", "fsdf", "1231313", Role.ROLE_USER)).subscribe();
             userRepo.save(new User(null, "test2", encoder.encode("12345"), "ffasdfasf", "fksdf",
-                    "fksld", "fskldfj", "fsdf", "1231313", Role.ROLE_ADMIN));
+                    "fksld", "fskldfj", "fsdf", "1231313", Role.ROLE_ADMIN)).subscribe();
 
             Taco taco1 = new Taco();
             taco1.setName("Carnivore");
             taco1.setIngredients(Arrays.asList(
                     flourTortilla, groundBeef, carnitas,
                     sourCream, salsa, cheddar));
-            tacoRepo.save(taco1);
+            tacoRepo.save(taco1).subscribe();
 
             Taco taco2 = new Taco();
             taco2.setName("Bovine Bounty");
             taco2.setIngredients(Arrays.asList(
                     cornTortilla, groundBeef, cheddar,
                     jack, sourCream));
-            tacoRepo.save(taco2);
+            tacoRepo.save(taco2).subscribe();
 
             Taco taco3 = new Taco();
             taco3.setName("Veg-Out");
             taco3.setIngredients(Arrays.asList(
                     flourTortilla, cornTortilla, tomatoes,
                     lettuce, salsa));
-            tacoRepo.save(taco3);
+            tacoRepo.save(taco3).subscribe();
         };
     }
 

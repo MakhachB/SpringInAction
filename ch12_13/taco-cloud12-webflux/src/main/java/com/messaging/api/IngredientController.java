@@ -5,6 +5,8 @@ import com.messaging.repository.IngredientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping(path = "/api/ingredients", produces = "application/json")
@@ -15,22 +17,27 @@ public class IngredientController {
     private final IngredientRepository repo;
 
     @GetMapping
-    public Iterable<Ingredient> allIngredients() {
+    public Flux<Ingredient> allIngredients() {
         return repo.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Mono<Ingredient> byId(@PathVariable String id) {
+        return repo.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
 //    @PreAuthorize("hasRole('ADMIN')")
-    public Ingredient saveIngredient(@RequestBody Ingredient ingredient) {
-        return repo.save(ingredient);
+    public Mono<Ingredient> saveIngredient(@RequestBody Mono<Ingredient> ingredient) {
+        return repo.saveAll(ingredient).next();
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
 //    @PreAuthorize("hasRole('ADMIN')")
-    public void deleteIngredient(@PathVariable("id") String ingredientId) {
-        repo.deleteById(ingredientId);
+    public void deleteIngredient(@PathVariable("id") Mono<String> ingredientId) {
+        repo.deleteById(ingredientId).subscribe();
     }
 
 }

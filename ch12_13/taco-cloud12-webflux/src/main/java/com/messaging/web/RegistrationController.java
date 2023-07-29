@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import reactor.core.publisher.Mono;
 
 @Controller
 @RequestMapping("/register")
@@ -23,8 +24,12 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public String processRegistration(RegistrationForm form) {
-        userRepository.save(form.toUser(passwordEncoder));
+    public String processRegistration(Mono<RegistrationForm> form) {
+//        userRepository.saveAll(form.toUser(passwordEncoder));
+        form
+                .flatMap(rf -> Mono.just(rf.toUser(passwordEncoder)))
+                .flatMap(userRepository::save)
+                .subscribe();
         return "redirect:/login";
     }
 

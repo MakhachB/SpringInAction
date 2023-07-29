@@ -13,6 +13,8 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -49,7 +51,8 @@ public class DesignTacoController {
 
     @ModelAttribute
     public void addIngredientsToModel(Model model) {
-        Iterable<Ingredient> ingredients = ingredientRepository.findAll();
+        List<Ingredient> ingredients = new ArrayList<>();
+        ingredientRepository.findAll().subscribe(ingredients::add);
         Type[] types = Type.values();
 
         for (Type type : types) {

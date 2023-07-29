@@ -5,7 +5,6 @@ import com.messaging.model.Ingredient.Type;
 import com.messaging.model.Taco;
 import com.messaging.repository.TacoRepository;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentMatchers;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
@@ -15,7 +14,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -90,7 +89,7 @@ class TacoApiControllerTest {
                 .exchange()
                 .expectStatus().isCreated()
                 .expectBody(Taco.class)
-                    .isEqualTo(savedTaco);
+                .isEqualTo(savedTaco);
     }
 
     @Test
