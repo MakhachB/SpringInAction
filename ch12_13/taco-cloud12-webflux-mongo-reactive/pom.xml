@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>taco-cloud12-webflux-r2dbc</artifactId>
+    <artifactId>taco-cloud12-webflux-mongo-reactive</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>taco-cloud12-webflux-r2dbc</name>
-    <description>taco-cloud12-webflux-r2dbc</description>
+    <name>taco-cloud12-webflux-mongo-reactive</name>
+    <description>taco-cloud12-webflux-mongo-reactive</description>
     <properties>
         <java.version>11</java.version>
     </properties>
