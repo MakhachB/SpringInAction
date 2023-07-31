@@ -99,7 +99,7 @@ class TacoApiControllerTest {
 
     private Taco testTaco(Long number) {
         Taco taco = new Taco();
-        taco.setId(number);
+        taco.setId(number.toString());
         taco.setName("Taco " + number);
         Set<Ingredient> ingredients = new HashSet<>();
         ingredients.add(new Ingredient("INGA", "Ingredient A", Type.WRAP));

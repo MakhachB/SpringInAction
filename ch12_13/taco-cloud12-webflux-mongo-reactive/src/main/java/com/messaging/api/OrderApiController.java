@@ -3,7 +3,6 @@ package com.messaging.api;
 import com.messaging.messaging.OrderMessagingService;
 import com.messaging.model.TacoOrder;
 import com.messaging.repository.OrderRepository;
-import com.messaging.service.TacoOrderAggregateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -23,7 +22,6 @@ public class OrderApiController {
 
     private final OrderMessagingService messagingService;
 
-    private final TacoOrderAggregateService aggregateService;
 
     @GetMapping(params = "recent")
     public Flux<TacoOrder> recentOrders() {
@@ -32,12 +30,8 @@ public class OrderApiController {
     }
 
     @PutMapping(path = "/{id}", consumes = "application/json")
-    public Mono<TacoOrder> putOrder(@PathVariable Long id,
+    public Mono<TacoOrder> putOrder(@PathVariable String id,
                                     @RequestBody Mono<TacoOrder> tacoOrder) {
-
-//        tacoOrder.setId(id);
-//        return repo.save(tacoOrder);
-
         return tacoOrder
                 .flatMap(to -> {
                     to.setId(id);
@@ -47,7 +41,7 @@ public class OrderApiController {
     }
 
     @PatchMapping(path = "/{id}", consumes = "application/json")
-    public Mono<TacoOrder> patchOrder(@PathVariable Long id,
+    public Mono<TacoOrder> patchOrder(@PathVariable String id,
                                       @RequestBody TacoOrder patch) {
         return repo.findById(id).map(order -> {
             if (patch.getDeliveryName() != null) order.setDeliveryName(patch.getDeliveryName());
@@ -66,14 +60,14 @@ public class OrderApiController {
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<TacoOrder> postOrder(@RequestBody TacoOrder order) {
 //        messagingService.sendOrder(order);
-        return aggregateService.save(order);
+        return repo.save(order);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteOrder(@PathVariable Long id) {
+    public void deleteOrder(@PathVariable String id) {
         try {
-            repo.deleteById(id);
+            repo.deleteById(id).subscribe();
         } catch (EmptyResultDataAccessException ignored) {
         }
     }

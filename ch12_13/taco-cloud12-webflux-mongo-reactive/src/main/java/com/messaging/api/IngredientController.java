@@ -23,7 +23,7 @@ public class IngredientController {
 
     @GetMapping("/{id}")
     public Mono<Ingredient> byId(@PathVariable String id) {
-        return repo.findBySlug(id);
+        return repo.findById(id);
     }
 
     @PostMapping
@@ -37,7 +37,7 @@ public class IngredientController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
 //    @PreAuthorize("hasRole('ADMIN')")
     public void deleteIngredient(@PathVariable String id) {
-        repo.findBySlug(id)
+        repo.findById(id)
                 .doOnNext(repo::delete)
                 .subscribe();
     }

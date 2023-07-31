@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.boot.test.autoconfigure.data.r2dbc.DataR2dbcTest;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-@DataR2dbcTest
+@DataMongoTest
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 class IngredientRepositoryTest {
 
@@ -53,7 +54,7 @@ class IngredientRepositoryTest {
                 })
                 .verifyComplete();
 
-        StepVerifier.create(repo.findBySlug("FLTO"))
+        StepVerifier.create(repo.findById("FLTO"))
                 .assertNext(ingredient ->
                         ingredient.equals(new Ingredient("FLTO", "Flour Tortilla", Type.WRAP)))
                 .verifyComplete();

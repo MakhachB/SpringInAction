@@ -2,23 +2,22 @@ package com.messaging.model;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@RequiredArgsConstructor
+@AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = "id")
+@Document
 public class Ingredient {
 
 //    private static final long serialVersionID = 1L;
 
     @Id
-    private Long id;
+    private String id;
 
-    private @NonNull String slug;
+    private String name;
 
-    private @NonNull String name;
-
-    private @NonNull Type type;
+    private Type type;
 
     public enum Type {
         WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE

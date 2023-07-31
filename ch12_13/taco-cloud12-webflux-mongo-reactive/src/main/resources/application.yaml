@@ -1,16 +1,25 @@
 spring:
-  r2dbc:
-    url: r2dbc:postgresql://localhost:5432/tacocloud
-    username: postgres
-    password: postgres
+#  r2dbc:
+#    url: r2dbc:postgresql://localhost:5432/tacocloud
+#    username: postgres
+#    password: postgres
 
 #  datasource:
 #    driver-class-name: org.postgresql.Driver
 
-  sql:
-    init:
-      schema-locations: classpath:db/schema-local.sql
-      mode: always
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+#      username:
+#      password:
+      database: tacocloud
+
+
+  #  sql:
+#    init:
+#      schema-locations: classpath:db/schema-local.sql
+#      mode: always
 
   #  jpa:
 #    hibernate:

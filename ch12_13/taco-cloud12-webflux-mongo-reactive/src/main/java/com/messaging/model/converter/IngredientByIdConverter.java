@@ -15,6 +15,6 @@ public class IngredientByIdConverter implements Converter<String, Mono<Ingredien
 
     @Override
     public Mono<Ingredient> convert(String id) {
-        return ingredientRepository.findBySlug(id);
+        return ingredientRepository.findById(id);
     }
 }

@@ -43,9 +43,9 @@ public class OrderController {
                                SessionStatus sessionStatus) {
         if (errors.hasErrors()) return "orderForm";
 
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        User user = (User) authentication.getPrincipal();
-//        order.setUser(user);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        order.setUser(user);
         orderRepository.save(order).subscribe();
 
         log.info("Order submitted: {}", order);

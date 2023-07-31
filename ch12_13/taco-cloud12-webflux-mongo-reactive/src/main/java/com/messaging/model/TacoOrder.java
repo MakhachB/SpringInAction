@@ -1,16 +1,27 @@
 package com.messaging.model;
 
+import com.messaging.security.User;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.util.*;
 
 @Data
-public class TacoOrder {
+@Document
+public class TacoOrder  {
+
+//    private static final long serialVersionID = 1L;
 
     @Id
-    private Long id;
+    private String id;
+
+    private Date placedAt = new Date();
+
+    private User user;
+
     private String deliveryName;
     private String deliveryStreet;
     private String deliveryCity;
@@ -20,16 +31,10 @@ public class TacoOrder {
     private String ccExpiration;
     private String ccCVV;
 
-    private Set<Long> tacoIds = new LinkedHashSet<>();
-
-    @Transient
-    private transient List<Taco> tacos = new ArrayList<>();
+    public List<Taco> tacos = new ArrayList<>();
 
     public void addTaco(Taco taco) {
         tacos.add(taco);
-        if (Objects.nonNull(taco.getId())) {
-            tacoIds.add(taco.getId());
-        }
     }
 }
 

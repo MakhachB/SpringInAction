@@ -1,12 +1,8 @@
 package com.messaging.security;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,16 +11,15 @@ import java.util.Collection;
 import java.util.List;
 
 @Data
-@Table("Users")
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = "id")
+@Document
 public class User implements UserDetails {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    private Long id;
+    private String id;
 
     private String username;
     private String password;
@@ -34,8 +29,7 @@ public class User implements UserDetails {
     private String state;
     private String zip;
     private String phoneNumber;
-
-    @Column("user_role")
+    private String email;
     private Role role;
 
     @Override

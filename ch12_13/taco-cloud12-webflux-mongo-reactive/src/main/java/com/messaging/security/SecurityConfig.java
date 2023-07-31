@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.reactive.EnableWebFlux
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
@@ -24,7 +26,7 @@ public class SecurityConfig {
     public SecurityWebFilterChain filterChain(ServerHttpSecurity http) {
         return http
                 .authorizeExchange()
-//                .pathMatchers("/design/**", "/orders/**").hasRole("USER")
+                .pathMatchers("/design/**", "/orders/**").hasRole("USER")
                 .anyExchange().permitAll()
 
                 .and()
@@ -43,8 +45,16 @@ public class SecurityConfig {
 
     @Bean
     public ReactiveUserDetailsService userDetailsService() {
-        return username -> userRepo.findByUsername(username).cast(UserDetails.class);
+//        return username -> userRepo.findByUsername(username).cast(UserDetails.class);
+        return username -> userRepo
+                .findByUsername(username)
+                .handle((user, sink) -> {
+                    if (user == null) {
+                        sink.error(new UsernameNotFoundException("User '" + username + "' not found"));
+                    }
+                });
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
