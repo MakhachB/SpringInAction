@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Arrays;
 
@@ -30,7 +29,7 @@ public class DataLoader {
     public CommandLineRunner RepoDataLoader(
             IngredientRepository ingRepo,
             UserRepository userRepo,
-            PasswordEncoder encoder,
+//            PasswordEncoder encoder,
             TacoRepository tacoRepo) {
         return new CommandLineRunner() {
             @Override
@@ -52,13 +51,13 @@ public class DataLoader {
                 Ingredient salsa = saveAnIngredient("SLSA", "Salsa", Type.SAUCE);
                 Ingredient sourCream = saveAnIngredient("SRCR", "Sour Cream", Type.SAUCE);
 
-                userRepo.save(new User(null, "habuma", encoder.encode("password"),
-                        "Craig Walls", "123 North Street", "Cross Roads", "TX",
-                        "76227", "123-123-1234", "mail1", Role.ROLE_ADMIN)).subscribe();
-                userRepo.save(new User(null, "test", encoder.encode("12345"), "ffasdfasf", "fksdf",
-                        "fksld", "fskldfj", "fsdf", "1231313", "mail3", Role.ROLE_USER)).subscribe();
-                userRepo.save(new User(null, "test2", encoder.encode("12345"), "ffasdfasf", "fksdf",
-                        "fksld", "fskldfj", "fsdf", "1231313", "mail3", Role.ROLE_ADMIN)).subscribe();
+//                userRepo.save(new User(null, "habuma", encoder.encode("password"),
+//                        "Craig Walls", "123 North Street", "Cross Roads", "TX",
+//                        "76227", "123-123-1234", "mail1", Role.ROLE_ADMIN)).subscribe();
+//                userRepo.save(new User(null, "test", encoder.encode("12345"), "ffasdfasf", "fksdf",
+//                        "fksld", "fskldfj", "fsdf", "1231313", "mail3", Role.ROLE_USER)).subscribe();
+//                userRepo.save(new User(null, "test2", encoder.encode("12345"), "ffasdfasf", "fksdf",
+//                        "fksld", "fskldfj", "fsdf", "1231313", "mail3", Role.ROLE_ADMIN)).subscribe();
 
                 Taco taco1 = new Taco();
                 taco1.setId("TACO1");

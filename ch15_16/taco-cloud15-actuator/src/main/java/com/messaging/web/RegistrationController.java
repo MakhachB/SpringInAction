@@ -3,7 +3,6 @@ package com.messaging.web;
 import com.messaging.repository.UserRepository;
 import com.messaging.security.RegistrationForm;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,21 +15,21 @@ import reactor.core.publisher.Mono;
 public class RegistrationController {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+//    private final PasswordEncoder passwordEncoder;
 
-    @GetMapping
-    public String registerFrom() {
-        return "registration";
-    }
+//    @GetMapping
+//    public String registerFrom() {
+//        return "registration";
+//    }
 
-    @PostMapping
-    public String processRegistration(Mono<RegistrationForm> form) {
-//        userRepository.saveAll(form.toUser(passwordEncoder));
-        form
-                .flatMap(rf -> Mono.just(rf.toUser(passwordEncoder)))
-                .flatMap(userRepository::save)
-                .subscribe();
-        return "redirect:/login";
-    }
+//    @PostMapping
+//    public String processRegistration(Mono<RegistrationForm> form) {
+////        userRepository.saveAll(form.toUser(passwordEncoder));
+//        form
+////                .flatMap(rf -> Mono.just(rf.toUser(passwordEncoder)))
+//                .flatMap(userRepository::save)
+//                .subscribe();
+//        return "redirect:/login";
+//    }
 
 }

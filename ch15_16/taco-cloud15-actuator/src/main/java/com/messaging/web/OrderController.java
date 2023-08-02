@@ -7,10 +7,10 @@ import com.messaging.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
+//import org.springframework.security.access.prepost.PreAuthorize;
+//import org.springframework.security.core.Authentication;
+//import org.springframework.security.core.annotation.AuthenticationPrincipal;
+//import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -38,14 +38,14 @@ public class OrderController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public String processOrder(@Valid TacoOrder order, Errors errors,
                                SessionStatus sessionStatus) {
         if (errors.hasErrors()) return "orderForm";
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) authentication.getPrincipal();
-        order.setUser(user);
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        User user = (User) authentication.getPrincipal();
+//        order.setUser(user);
         orderRepository.save(order).subscribe();
 
         log.info("Order submitted: {}", order);
@@ -55,7 +55,8 @@ public class OrderController {
 
     @GetMapping
     public String ordersForUser(
-            @AuthenticationPrincipal User user, Model model) {
+//            @AuthenticationPrincipal User user, Model model
+    ) {
         PageRequest pageable = PageRequest.of(0, props.getPageSize());
 
 //        model.addAttribute("orders",

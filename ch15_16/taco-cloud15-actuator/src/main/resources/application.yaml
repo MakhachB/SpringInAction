@@ -7,6 +7,9 @@ spring:
 #  datasource:
 #    driver-class-name: org.postgresql.Driver
 
+#  main:
+#    allow-bean-definition-overriding: true
+
   data:
     mongodb:
       host: localhost
@@ -63,15 +66,19 @@ spring:
 #      enabled: false
 
 management:
-  info:
-    env:
-      enabled: true
   endpoints:
     web:
 #      base-path: /management
       exposure:
         include: '*'
 #        exclude: threaddump, heapdump
+  info:
+    env:
+      enabled: true
+    build:
+      enabled: true
+    git:
+      mode: full
   endpoint:
     health:
       show-details: always

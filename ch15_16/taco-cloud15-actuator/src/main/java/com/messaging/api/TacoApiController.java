@@ -1,7 +1,9 @@
 package com.messaging.api;
 
+import com.messaging.model.Ingredient;
 import com.messaging.model.Taco;
 import com.messaging.repository.TacoRepository;
+import io.micrometer.core.instrument.MeterRegistry;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +17,10 @@ import reactor.core.publisher.Mono;
 public class TacoApiController {
 
     public static final int RESENT_TACO_SIZE = 12;
+
     private final TacoRepository repo;
+    private final MeterRegistry meterRegistry;
+
 
     @GetMapping(params = "recent")
     public Flux<Taco> recentTacos() {
@@ -32,6 +37,15 @@ public class TacoApiController {
     public Mono<Taco> postTaco(@RequestBody Mono<Taco> taco) {
 //        return repo.saveAll(taco).next();
 //      OR
-        return taco.flatMap(repo::save);
+
+        return taco
+                .map(t -> {
+                    for (Ingredient ingredient : t.getIngredients()) {
+                        meterRegistry.counter("tacocloud", "ingredient",
+                                ingredient.getId()).increment();
+                    }
+                    return t;
+                })
+                .flatMap(repo::save);
     }
 }

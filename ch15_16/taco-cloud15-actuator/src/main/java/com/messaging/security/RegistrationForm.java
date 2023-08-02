@@ -1,7 +1,7 @@
 package com.messaging.security;
 
 import lombok.Data;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Data
 public class RegistrationForm {
@@ -15,8 +15,8 @@ public class RegistrationForm {
     private String zip;
     private String phone;
 
-    public User toUser(PasswordEncoder encoder) {
-        return new User(null, username, encoder.encode(password),
-                fullname, street, city, state, zip, phone, "testMail", Role.ROLE_USER);
-    }
+//    public User toUser(PasswordEncoder encoder) {
+//        return new User(null, username, encoder.encode(password),
+//                fullname, street, city, state, zip, phone, "testMail", Role.ROLE_USER);
+//    }
 }
