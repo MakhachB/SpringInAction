@@ -2,6 +2,8 @@ spring:
   jmx:
     enabled: true
 
+  lifecycle:
+    timeout-per-shutdown-phase: 20s
   #  r2dbc:
 #    url: r2dbc:postgresql://localhost:5432/tacocloud
 #    username: postgres
@@ -96,6 +98,11 @@ management:
   endpoint:
     health:
       show-details: always
+      probes:
+        enabled: true
+  health:
+    mongo:
+      enabled: false
 #    env:
 #      post:
 #        enabled: true # Don't work in this version
@@ -113,6 +120,7 @@ logging:
 
 server:
   port: 8080
+  shutdown: graceful
 
 #  port: 0 // spring will generate random port to avoid random conflict
 #  port: 8443
