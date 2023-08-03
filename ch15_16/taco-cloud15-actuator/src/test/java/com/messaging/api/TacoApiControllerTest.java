@@ -4,7 +4,9 @@ import com.messaging.model.Ingredient;
 import com.messaging.model.Ingredient.Type;
 import com.messaging.model.Taco;
 import com.messaging.repository.TacoRepository;
+import io.micrometer.core.instrument.MeterRegistry;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
@@ -38,10 +40,11 @@ class TacoApiControllerTest {
     void recentTacosTest() {
         Flux<Taco> tacoFlux = Flux.just(tacos);
         TacoRepository tacoRepo = mock(TacoRepository.class);
+        MeterRegistry meterRegistry = mock(MeterRegistry.class);
         when(tacoRepo.findAll()).thenReturn(tacoFlux);
 
         WebTestClient testClient = WebTestClient.bindToController(
-                new TacoApiController(tacoRepo)
+                new TacoApiController(tacoRepo, meterRegistry)
         ).build();
 
         testClient.get().uri("/api/tacos?recent")
@@ -71,9 +74,10 @@ class TacoApiControllerTest {
     @Test
     void tacoByIdTest() {
         TacoRepository tacoRepo = mock(TacoRepository.class);
+        MeterRegistry meterRegistry = mock(MeterRegistry.class);
 
         WebTestClient testClient = WebTestClient.bindToController(
-                new TacoApiController(tacoRepo)
+                new TacoApiController(tacoRepo, meterRegistry)
         ).build();
 
         Mono<Taco> unsavedTacoMono = Mono.just(testTaco(1L));

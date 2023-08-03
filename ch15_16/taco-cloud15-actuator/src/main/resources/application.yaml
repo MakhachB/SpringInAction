@@ -9,7 +9,14 @@ spring:
 
 #  main:
 #    allow-bean-definition-overriding: true
-
+  boot:
+    admin:
+      client:
+        url: http://localhost:9090
+        username: admin
+        password: 53cr3t
+  application:
+    name: TacoCloud 15
   data:
     mongodb:
       host: localhost
